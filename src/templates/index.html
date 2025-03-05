@@ -4,9 +4,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Registration Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../static/main.js"></script>
 </head>
+
 <body>
-    <h1>Welcome to the Credit Registration Tool</h1>
-    <p>This is a basic HTML template.</p>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-credit-card-2-back" viewBox="0 0 16 16" width="40" height="32">
+                <path d="M11 5.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z"/>
+                <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm13 2v5H1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1m-1 9H2a1 1 0 0 1-1-1v-1h14v1a1 1 0 0 1-1 1"/>
+            </svg>
+            <span class="fs-4">Herramienta de registro de crédito</span>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2" aria-current="page">Nuevo Registro</a></li>
+            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Listado de Registros</a></li>
+          </ul>
+        </header>
+      </div>
+
+      <div class="conteiner mb-2">
+        <div class="card shadow" style="margin-left: 2em; margin-right: 2em;">
+            <div class="card-body">
+                <form action=""  method="">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Nombre del cliente</label>
+                            <input type="text" class="form-control mb-3" id="name" name="name" required>
+                        </div>
+                        <div class="col">
+                            <label>Monto</label>
+                            <input type="number" class="form-control mb-3" id="amount" name="amount" required>
+                        </div>
+                        <div class="col">
+                            <label>Tasa de interes</label>
+                            <input type="number" class="form-control mb-3" id="interest_rate" name="interest_rate" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Plazo</label>
+                            <input type="number" class="form-control mb-3" id="term" name="term" required>
+                        </div>
+                        <div class="col">
+                            <label>Fecha de otorgamiento</label>
+                            <input type="number" class="form-control mb-3" id="date_of_grant" name="date_of_grant" required>
+                        </div>
+                        <div class="col">
+                            <button class="btn form-control mb-2 mt-4 btn-primary" type="submit">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+
 </body>
+
 </html>
