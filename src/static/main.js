@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("/api/creditlist") // Llamada al backend Flask
+  fetch("/api/creditlist")
     .then((response) => response.json())
     .then((data) => {
       const tbody = document.getElementById("credittable");
@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error al cargar créditos:", error));
 });
 
+// Habilitar // desahibiliar edicion de datos
 function toggleEdit(row, enable) {
   const inputs = row.querySelectorAll("input");
   const editBtn = row.querySelector(".edit-btn");
@@ -64,31 +65,34 @@ function toggleEdit(row, enable) {
   saveBtn.style.display = enable ? "inline-block" : "none";
 }
 
+// Actualizar datos 
 function saveCredit(row, id) {
   const inputs = row.querySelectorAll("input");
   const updatedData = {
-      cliente: inputs[0].value,
-      monto: inputs[1].value,
-      tasa_interes: inputs[2].value,
-      plazo: inputs[3].value,
-      fecha_otorgamiento: inputs[4].value
+    cliente: inputs[0].value,
+    monto: inputs[1].value,
+    tasa_interes: inputs[2].value,
+    plazo: inputs[3].value,
+    fecha_otorgamiento: inputs[4].value,
   };
 
   fetch(`/api/editcredit/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedData)
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(updatedData),
   })
-  .then(response => {
+    .then((response) => {
       if (response.ok) {
-          toggleEdit(row, false);
-          location.reload();  // Recargar la página para mostrar los cambios
+        toggleEdit(row, false);
+        location.reload(); // Recargar la página para mostrar los cambios
       } else {
-          alert("Error al actualizar crédito");
+        alert("Error al actualizar crédito");
       }
-  })
-  .catch(error => console.error("Error:", error));
+    })
+    .catch((error) => console.error("Error:", error));
 }
+
+// Borrar Credito
 
 function deleteCredit(id) {
   if (!confirm("¿Seguro que deseas eliminar este crédito?")) return;
@@ -105,3 +109,63 @@ function deleteCredit(id) {
     })
     .catch((error) => console.error("Error:", error));
 }
+
+// Código para grafica de creditos otorgados 
+
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("api/creditlist")
+  .then(response => response.json())
+        .then(data => {
+            const totalCreditos = data.length;
+
+            new Chart("credito_otorgado", {
+                type: "bar",
+                data: {
+                    labels: ["Créditos otorgados"],
+                    datasets: [{
+                        backgroundColor: ["orange"],
+                        data: [totalCreditos]
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Cantidad Total de Créditos Otorgados"
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("Error al cargar la gráfica:", error));
+});
+
+// Grafica relacion cliente - monto 
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("api/creditlist")
+  .then(response => response.json())
+        .then(data => {
+          let clientes = data.map(credito => credito.cliente);
+          let creditos = data.map(credito => credito.monto); 
+
+          let ctxPie = document.getElementById("cliente_monto").getContext("2d");
+            new Chart(ctxPie, {
+                type: "doughnut",
+                data: {
+                    labels: clientes,
+                    datasets: [{
+                        label: "Monto por Cliente",
+                        backgroundColor: ["red", "green", "blue", "orange", "purple","brown"],
+                        data: creditos
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                      display: true,
+                      text: "Relación Monto - Cliente"
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("Error al cargar la gráfica:", error));
+});
