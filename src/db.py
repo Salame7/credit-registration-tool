@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
-class Credits(db.Model):
+class Creditos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     cliente = db.Column(db.String)
     monto = db.Column(db.Float)
@@ -31,7 +31,7 @@ class Credits(db.Model):
             "id": user.id,
             "cliente": user.cliente,
             "monto": user.monto,
-            "tasa_intereses": user.tasa_interes,
+            "tasa_interes": user.tasa_interes,
             "plazo": user.plazo,
             "fecha_otorgamiento": user.fecha_otorgamiento
         }
