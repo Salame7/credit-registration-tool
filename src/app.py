@@ -40,7 +40,7 @@ def addcredit():
         db.session.add(newcredit)
         db.session.commit()
 
-        return jsonify(newcredit.serialize()), 200
+        return render_template("index.html"), 200
     
     except Exception:
         exception("\n[SERVER]: Error in route /api/addcredit. Log: \n")
